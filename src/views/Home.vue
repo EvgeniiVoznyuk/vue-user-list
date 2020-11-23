@@ -1,17 +1,20 @@
 <template>
   <div class="container">
-    <Table :users="users" />
+    <!-- <Toolbar v-on:add-user="addUser" v-on:set-query="setQuery" /> -->
+    <Table :users="filtredUsers()" v-on:delete-users="deleteUsers" />
   </div>
 </template>
 
-<script>
+<script lang="">
 import Vue from 'vue';
+// import Toolbar from '../components/Toolbar.vue';
 import Table from '../components/Table.vue';
 
 export default Vue.extend({
-  name: 'Home',
+  name: 'Users',
   components: {
     Table,
+    // Toolbar,
   },
   created() {
     fetch('/api/users')
@@ -19,18 +22,36 @@ export default Vue.extend({
       .then((json) => {
         this.users = json.users;
       });
+    this.$emit('show-users');
   },
   data() {
     return {
       users: [],
       searchQuery: '',
-      columns: [
-        { field: 'name', header: 'Name' },
-        { field: 'userName', header: 'UserName' },
-        { field: 'email', header: 'Email' },
-        { field: 'role', header: 'Role(s)' },
-      ],
     };
+  },
+  methods: {
+    addUser(user) {
+      const newUser = {
+        ...user,
+        role: user.role.name,
+        id: this.users.length + 1,
+      };
+      this.users.unshift(newUser);
+    },
+    setQuery(query) {
+      this.searchQuery = query;
+    },
+    filtredUsers() {
+      return this.users.filter(
+        ({ name, userName, email }) => name.toLowerCase().includes(this.searchQuery.toLowerCase())
+          || userName.toLowerCase().includes(this.searchQuery.toLowerCase())
+          || email.toLowerCase().includes(this.searchQuery.toLowerCase()),
+      );
+    },
+    deleteUsers(usersId) {
+      this.users = this.users.filter((user) => !usersId.includes(user.id));
+    },
   },
 });
 </script>
