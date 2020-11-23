@@ -9,7 +9,7 @@ import Vue from 'vue';
 import Table from '../components/Table.vue';
 
 export default Vue.extend({
-  name: 'Users',
+  name: 'Home',
   components: {
     Table,
   },
