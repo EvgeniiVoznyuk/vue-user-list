@@ -1,20 +1,25 @@
 <template>
-  <div class="container">
-    <!-- <Toolbar v-on:add-user="addUser" v-on:set-query="setQuery" /> -->
-    <Table :users="filtredUsers()" v-on:delete-users="deleteUsers" />
+  <div class="app">
+    <AppHeader />
+    <div class="container">
+      <Toolbar v-on:add-user="addUser" v-on:set-query="setQuery" />
+      <Table :users="filtredUsers()" v-on:delete-users="deleteUsers" />
+    </div>
   </div>
 </template>
 
 <script lang="">
 import Vue from 'vue';
-// import Toolbar from '../components/Toolbar.vue';
+import AppHeader from '../components/AppHeader.vue';
+import Toolbar from '../components/Toolbar.vue';
 import Table from '../components/Table.vue';
 
 export default Vue.extend({
   name: 'Users',
   components: {
     Table,
-    // Toolbar,
+    AppHeader,
+    Toolbar,
   },
   created() {
     fetch('/api/users')
@@ -55,3 +60,15 @@ export default Vue.extend({
   },
 });
 </script>
+
+<style scoped>
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+</style>
