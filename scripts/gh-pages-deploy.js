@@ -7,10 +7,7 @@ const fs = require('fs');
     await execa('git', ['checkout', '--orphan', 'gh-pages']);
     // eslint-disable-next-line no-console
     console.log('Building started...');
-<<<<<<< HEAD
-=======
-    await execa('npm', ['run', 'build']);
->>>>>>> 16e48211048e465b860bc1e03650ca90238c6bb5
+    // await execa('npm', ['run', 'build']);
     // Understand if it's dist or build folder
     const folderName = fs.existsSync('dist') ? 'dist' : 'build';
     await execa('git', ['--work-tree', folderName, 'add', '--all']);
@@ -24,10 +21,6 @@ const fs = require('fs');
   } catch (e) {
     // eslint-disable-next-line no-console
     console.log(e.message);
-<<<<<<< HEAD
-=======
-
->>>>>>> 16e48211048e465b860bc1e03650ca90238c6bb5
     process.exit(1);
   }
 })();
