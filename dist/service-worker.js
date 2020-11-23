@@ -14,7 +14,11 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
+<<<<<<< HEAD
   "/precache-manifest.945dfd0812530c8d3b45dde5ce6849aa.js"
+=======
+  "/precache-manifest.4f8a5af2cec8671dfa92a6c97295750b.js"
+>>>>>>> 16e48211048e465b860bc1e03650ca90238c6bb5
 );
 
 workbox.core.setCacheNameDetails({prefix: "vue-users-list"});
